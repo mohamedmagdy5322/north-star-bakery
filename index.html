@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>North Star Bakery | Artisanal Breads & Pastries</title>
+    <title>North Star Bakery | Artisanal Breads &amp; Pastries</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -33,47 +33,36 @@
 
     <section id="menu" class="container section">
         <h2 class="section-title">Our Daily Specialties</h2>
-        <div class="menu-grid">
-            <div class="menu-card">
-                <div class="card-icon">&#129366;</div>
-                <h3>Artisanal Sourdough</h3>
-                <p>Fermented for 36 hours with a crisp crust and a soft, airy crumb.</p>
-                <span class="price">$6.50</span>
-            </div>
-            <div class="menu-card">
-                <div class="card-icon">&#129360;</div>
-                <h3>All-Butter Croissant</h3>
-                <p>Flaky, golden layers made with authentic European butter.</p>
-                <span class="price">$3.75</span>
-            </div>
-            <div class="menu-card">
-                <div class="card-icon">&#129744;</div>
-                <h3>Wild Berry Tart</h3>
-                <p>Fresh seasonal berries on a bed of rich vanilla custard cream.</p>
-                <span class="price">$5.25</span>
-            </div>
+        <p class="section-subtitle">Filter by category or save your favorite items for quick pre-ordering.</p>
+
+        <div class="filter-bar" role="group" aria-label="Filter menu specialties">
+            <button type="button" class="filter-btn active" data-filter="all">All Items</button>
+            <button type="button" class="filter-btn" data-filter="bread">Artisanal Breads</button>
+            <button type="button" class="filter-btn" data-filter="pastry">Pastries &amp; Tarts</button>
+            <button type="button" class="filter-btn" data-filter="favorites">Favorites (<span id="favCount">0</span>)</button>
         </div>
+
+        <div id="menuGrid" class="menu-grid"></div>
     </section>
 
     <section id="calculator" class="interactive-section">
         <div class="container">
             <h2 class="section-title">Freshness &amp; Order Estimator</h2>
             <p class="section-subtitle">Calculate when your custom batch of artisanal goods will be fresh out of the oven!</p>
-            
-            <div class="calc-box">
-                <label for="itemSelect">Choose Specialty Item:</label>
-                <select id="itemSelect">
-                    <option value="sourdough">Artisanal Sourdough (Prep time: 45 mins)</option>
-                    <option value="croissant">All-Butter Croissant (Prep time: 30 mins)</option>
-                    <option value="tart">Wild Berry Tart (Prep time: 25 mins)</option>
-                </select>
 
-                <label for="quantity">Quantity (Items):</label>
+            <div class="calc-box">
+                <div id="savedOrderBanner" class="saved-banner hidden" aria-live="polite"></div>
+
+                <label for="itemSelect">Choose Specialty Item:</label>
+                <select id="itemSelect"></select>
+
+                <label for="quantity">Quantity (Items, 1–20):</label>
                 <input type="number" id="quantity" min="1" max="20" value="1">
+                <small id="qtyError" class="field-error hidden" role="alert"></small>
 
                 <button id="calcBtn" class="btn" type="button">Estimate Ready Time</button>
 
-                <div id="calcResult" class="result-box hidden">
+                <div id="calcResult" class="result-box hidden" aria-live="polite">
                     <p id="resultText"></p>
                 </div>
             </div>
@@ -82,21 +71,27 @@
 
     <section id="contact" class="container section">
         <h2 class="section-title">Get in Touch / Pre-Order</h2>
-        <form id="contactForm" class="contact-form">
+        <form id="contactForm" class="contact-form" novalidate>
             <div class="form-group">
                 <label for="name">Your Name:</label>
-                <input type="text" id="name" required placeholder="Enter your full name">
+                <input type="text" id="name" placeholder="Enter your full name">
+                <small id="nameError" class="field-error hidden" role="alert"></small>
             </div>
+
             <div class="form-group">
                 <label for="email">Email Address:</label>
-                <input type="email" id="email" required placeholder="name@example.com">
+                <input type="email" id="email" placeholder="name@example.com">
+                <small id="emailError" class="field-error hidden" role="alert"></small>
             </div>
+
             <div class="form-group">
                 <label for="message">Special Requests / Notes:</label>
-                <textarea id="message" rows="4" placeholder="Tell us about any dietary needs or custom orders..."></textarea>
+                <textarea id="message" rows="4" placeholder="Tell us about any dietary needs or custom orders (at least 10 characters)..."></textarea>
+                <small id="messageError" class="field-error hidden" role="alert"></small>
             </div>
+
             <button type="submit" class="btn">Send Message</button>
-            <div id="formFeedback" class="hidden"></div>
+            <div id="formFeedback" class="hidden" aria-live="polite"></div>
         </form>
     </section>
 
